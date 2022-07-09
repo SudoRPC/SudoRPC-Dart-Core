@@ -1,13 +1,11 @@
 import 'package:sudorpc/src/structure/return/base.dart';
 
 abstract class SudoRPCReturnV1 extends SudoRPCReturn {
-  final String resource;
   final String identifier;
 
   final bool success;
 
   SudoRPCReturnV1({
-    required this.resource,
     required this.identifier,
     required this.success,
   }) : super("1.0");
@@ -18,10 +16,8 @@ class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
 
   SudoRPCReturnV1Success({
     required this.result,
-    required String resource,
     required String identifier,
   }) : super(
-          resource: resource,
           identifier: identifier,
           success: true,
         );
@@ -29,7 +25,6 @@ class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
   factory SudoRPCReturnV1Success.fromJson(Map<String, dynamic> json) {
     return SudoRPCReturnV1Success(
       result: json['result'],
-      resource: json['resource'],
       identifier: json['identifier'],
     );
   }
@@ -40,7 +35,6 @@ class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
       'version': version,
       'success': success,
       'result': result,
-      'resource': resource,
       'identifier': identifier,
     };
   }
@@ -52,7 +46,6 @@ class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
       'version: $version,',
       'success: $success,',
       'result: $result,',
-      'resource: $resource,',
       'identifier: $identifier,',
       '}',
     ].join('\n');
@@ -96,10 +89,8 @@ class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
 
   SudoRPCReturnV1Fail({
     required this.errors,
-    required String resource,
     required String identifier,
   }) : super(
-          resource: resource,
           identifier: identifier,
           success: false,
         );
@@ -109,7 +100,6 @@ class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
       errors: (json['errors'] as List<dynamic>)
           .map((error) => SudoRPCReturnV1ErrorItem.fromJson(error))
           .toList(),
-      resource: json['resource'],
       identifier: json['identifier'],
     );
   }
@@ -119,7 +109,6 @@ class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
     return {
       'version': version,
       'success': success,
-      'resource': resource,
       'identifier': identifier,
       'errors': errors.map((error) => error.toJson()).toList(),
     };
@@ -131,7 +120,6 @@ class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
       'SudoRPCReturnV1Fail{',
       'version: $version,',
       'success: $success,',
-      'resource: $resource,',
       'identifier: $identifier,',
       'errors: $errors,',
       '}',

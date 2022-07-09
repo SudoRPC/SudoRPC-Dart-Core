@@ -1,5 +1,7 @@
 library sudorpc;
 
+export 'src/exception/exception.dart';
+export 'src/exception/invalid_input_exception.dart';
 export 'src/structure/call/base.dart';
 export 'src/structure/call/create.dart';
 export 'src/structure/call/v1.dart';
