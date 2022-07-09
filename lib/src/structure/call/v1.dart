@@ -23,6 +23,7 @@ class SudoRPCCallV1<Metadata, Payload> extends SudoRPCCall {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'version': version,
@@ -31,5 +32,18 @@ class SudoRPCCallV1<Metadata, Payload> extends SudoRPCCall {
       'metadata': metadata,
       'payload': payload,
     };
+  }
+
+  @override
+  String toString() {
+    return [
+      'SudoRPCCallV1{',
+      'version: $version,',
+      'resource: $resource,',
+      'identifier: $identifier,',
+      'metadata: $metadata,',
+      'payload: $payload,',
+      '}',
+    ].join('\n');
   }
 }

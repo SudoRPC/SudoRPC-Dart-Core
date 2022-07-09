@@ -32,6 +32,7 @@ class SudoRPCReturnV1Success<SuccessResult>
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'version': version,
@@ -39,6 +40,18 @@ class SudoRPCReturnV1Success<SuccessResult>
       'resource': resource,
       'identifier': identifier,
     };
+  }
+
+  @override
+  String toString() {
+    return [
+      'SudoRPCReturnV1Success{',
+      'version: $version,',
+      'result: $result,',
+      'resource: $resource,',
+      'identifier: $identifier,',
+      '}',
+    ].join('\n');
   }
 }
 
@@ -97,6 +110,7 @@ class SudoRPCReturnV1Fail<FailResult>
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'version': version,
@@ -104,5 +118,17 @@ class SudoRPCReturnV1Fail<FailResult>
       'identifier': identifier,
       'errors': errors.map((error) => error.toJson()).toList(),
     };
+  }
+
+  @override
+  String toString() {
+    return [
+      'SudoRPCReturnV1Fail{',
+      'version: $version,',
+      'resource: $resource,',
+      'identifier: $identifier,',
+      'errors: $errors,',
+      '}',
+    ].join('\n');
   }
 }
