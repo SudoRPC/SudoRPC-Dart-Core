@@ -4,9 +4,12 @@ abstract class SudoRPCReturnV1 extends SudoRPCReturn {
   final String resource;
   final String identifier;
 
+  final bool success;
+
   SudoRPCReturnV1({
     required this.resource,
     required this.identifier,
+    required this.success,
   }) : super("1.0");
 }
 
@@ -20,6 +23,7 @@ class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
   }) : super(
           resource: resource,
           identifier: identifier,
+          success: true,
         );
 
   factory SudoRPCReturnV1Success.fromJson(Map<String, dynamic> json) {
@@ -34,6 +38,7 @@ class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
   Map<String, dynamic> toJson() {
     return {
       'version': version,
+      'success': success,
       'result': result,
       'resource': resource,
       'identifier': identifier,
@@ -45,6 +50,7 @@ class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
     return [
       'SudoRPCReturnV1Success{',
       'version: $version,',
+      'success: $success,',
       'result: $result,',
       'resource: $resource,',
       'identifier: $identifier,',
@@ -95,6 +101,7 @@ class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
   }) : super(
           resource: resource,
           identifier: identifier,
+          success: false,
         );
 
   factory SudoRPCReturnV1Fail.fromJson(Map<String, dynamic> json) {
@@ -111,6 +118,7 @@ class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
   Map<String, dynamic> toJson() {
     return {
       'version': version,
+      'success': success,
       'resource': resource,
       'identifier': identifier,
       'errors': errors.map((error) => error.toJson()).toList(),
@@ -122,6 +130,7 @@ class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
     return [
       'SudoRPCReturnV1Fail{',
       'version: $version,',
+      'success: $success,',
       'resource: $resource,',
       'identifier: $identifier,',
       'errors: $errors,',
