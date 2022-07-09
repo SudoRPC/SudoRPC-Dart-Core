@@ -36,14 +36,6 @@ class SudoRPCCallV1 extends SudoRPCCall {
 
   @override
   String toString() {
-    return [
-      'SudoRPCCallV1{',
-      'version: $version,',
-      'resource: $resource,',
-      'identifier: $identifier,',
-      'metadata: $metadata,',
-      'payload: $payload,',
-      '}',
-    ].join('\n');
+    return toJson().toString();
   }
 }

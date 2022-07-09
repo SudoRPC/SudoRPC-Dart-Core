@@ -33,7 +33,7 @@ void main() {
         'errors': [
           {
             'isInternalError': true,
-            'code': 'code',
+            'error': 'code',
             'message': 'message',
           },
         ],

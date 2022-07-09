@@ -3,8 +3,22 @@ import 'package:sudorpc/src/structure/return/base.dart';
 import 'package:sudorpc/src/structure/return/v1.dart';
 
 SudoRPCReturn createSudoRPCReturnFromJson(Map<String, dynamic> json) {
+  if (json['version'] == null) {
+    throw SudoRPCInvalidInputException(
+      message: "Missing 'version' field in return structure",
+      cause: json,
+    );
+  }
+
   if (json['version'] == "1.0") {
-    if (json['success'] as bool) {
+    if (json['success'] == null) {
+      throw SudoRPCInvalidInputException(
+        message: "Missing 'success' field in return structure",
+        cause: json,
+      );
+    }
+
+    if (json['success']) {
       try {
         return SudoRPCReturnV1Success.fromJson(json);
       } catch (e) {

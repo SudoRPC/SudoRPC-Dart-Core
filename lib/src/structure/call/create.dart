@@ -3,6 +3,13 @@ import 'package:sudorpc/src/structure/call/base.dart';
 import 'package:sudorpc/src/structure/call/v1.dart';
 
 SudoRPCCall createSudoRPCCallFromJson(Map<String, dynamic> json) {
+  if (json['version'] == null) {
+    throw SudoRPCInvalidInputException(
+      message: "Missing 'version' field in call structure",
+      cause: json,
+    );
+  }
+
   if (json['version'] == "1.0") {
     try {
       return SudoRPCCallV1.fromJson(json);
