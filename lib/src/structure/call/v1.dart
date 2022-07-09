@@ -1,11 +1,11 @@
 import 'package:sudorpc/src/structure/call/base.dart';
 
-class SudoRPCCallV1<Metadata, Payload> extends SudoRPCCall {
+class SudoRPCCallV1 extends SudoRPCCall {
   final String resource;
   final String identifier;
 
-  final Metadata metadata;
-  final Payload payload;
+  final Map<String, dynamic> metadata;
+  final Map<String, dynamic> payload;
 
   SudoRPCCallV1({
     required this.resource,

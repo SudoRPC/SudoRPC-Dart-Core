@@ -1,7 +1,6 @@
 import 'package:sudorpc/src/structure/return/base.dart';
 
-abstract class SudoRPCReturnV1<SuccessResult, FailResult>
-    extends SudoRPCReturn {
+abstract class SudoRPCReturnV1 extends SudoRPCReturn {
   final String resource;
   final String identifier;
 
@@ -11,9 +10,8 @@ abstract class SudoRPCReturnV1<SuccessResult, FailResult>
   }) : super("1.0");
 }
 
-class SudoRPCReturnV1Success<SuccessResult>
-    extends SudoRPCReturnV1<SuccessResult, dynamic> {
-  final SuccessResult result;
+class SudoRPCReturnV1Success extends SudoRPCReturnV1 {
+  final Map<String, dynamic> result;
 
   SudoRPCReturnV1Success({
     required this.result,
@@ -55,9 +53,9 @@ class SudoRPCReturnV1Success<SuccessResult>
   }
 }
 
-class SudoRPCReturnV1ErrorItem<FailResult> {
+class SudoRPCReturnV1ErrorItem {
   final bool isInternalError;
-  final FailResult result;
+  final Map<String, dynamic> result;
   final String error;
   final String message;
 
@@ -87,9 +85,8 @@ class SudoRPCReturnV1ErrorItem<FailResult> {
   }
 }
 
-class SudoRPCReturnV1Fail<FailResult>
-    extends SudoRPCReturnV1<dynamic, FailResult> {
-  final List<SudoRPCReturnV1ErrorItem<FailResult>> errors;
+class SudoRPCReturnV1Fail extends SudoRPCReturnV1 {
+  final List<SudoRPCReturnV1ErrorItem> errors;
 
   SudoRPCReturnV1Fail({
     required this.errors,
@@ -103,7 +100,7 @@ class SudoRPCReturnV1Fail<FailResult>
   factory SudoRPCReturnV1Fail.fromJson(Map<String, dynamic> json) {
     return SudoRPCReturnV1Fail(
       errors: (json['errors'] as List<dynamic>)
-          .map((error) => SudoRPCReturnV1ErrorItem<FailResult>.fromJson(error))
+          .map((error) => SudoRPCReturnV1ErrorItem.fromJson(error))
           .toList(),
       resource: json['resource'],
       identifier: json['identifier'],
