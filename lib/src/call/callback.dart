@@ -10,11 +10,15 @@ class SudoRPCCallCallback {
     required this.rejector,
   });
 
-  void resolve(Map<String, dynamic> result) {
+  void resolve(
+    final Map<String, dynamic> result,
+  ) {
     resolver(result);
   }
 
-  void reject(List<SudoRPCReturnV1ErrorItem> errors) {
+  void reject(
+    final List<SudoRPCReturnV1ErrorItem> errors,
+  ) {
     rejector(errors);
   }
 }

@@ -1,11 +1,15 @@
 import 'package:sudorpc/sudorpc.dart';
 
-abstract class SudoRPCCallProxy<Metadata, Payload, SuccessResult, FailResult> {
+abstract class SudoRPCCallProxy {
   void send(
-    SudoRPCCall call,
+    final SudoRPCCall call,
   );
 
   void addListener(
-    String listenerIdentifier,
+    final String listenerIdentifier,
+  );
+
+  void removeListener(
+    final String listenerIdentifier,
   );
 }
