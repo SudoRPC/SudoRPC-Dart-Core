@@ -1,6 +1,9 @@
 import 'package:sudorpc/sudorpc.dart';
+import 'package:uuid/uuid.dart';
 
 class SudoRPCCallManager {
+  final Uuid uuid = Uuid();
+
   final SudoRPCCallProxy proxy;
 
   final Map<String, SudoRPCCallCallback> _callbacks = Map();
@@ -11,8 +14,7 @@ class SudoRPCCallManager {
   });
 
   void ignite() {
-    final String listenerId =
-        'listener_${DateTime.now().millisecondsSinceEpoch}';
+    final String listenerId = uuid.v4();
 
     proxy.addListener(listenerId);
   }
