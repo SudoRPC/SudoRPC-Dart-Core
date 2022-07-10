@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:sudorpc/sudorpc.dart';
 import 'package:uuid/uuid.dart';
 
@@ -24,5 +26,34 @@ class SudoRPCCallManager {
       proxy.removeListener(listenerId);
     }
     _listeners.clear();
+  }
+
+  Future<Map<String, dynamic>> makeCall({
+    required String resource,
+    Map<String, dynamic>? metadata,
+    Map<String, dynamic>? payload,
+  }) {
+    final String identifier = uuid.v4();
+
+    final Completer<Map<String, dynamic>> completer = Completer();
+
+    final SudoRPCCallCallback callback = SudoRPCCallCallback(
+      resolver: completer.complete,
+      rejector: completer.completeError,
+    );
+
+    final Map<String, dynamic> fixedMetadata = metadata ?? {};
+    final Map<String, dynamic> fixedPayload = payload ?? {};
+
+    final SudoRPCCall call = createSudoRPCCall(
+      resource: resource,
+      identifier: identifier,
+      metadata: fixedMetadata,
+      payload: fixedPayload,
+    );
+
+    proxy.send(call);
+
+    return completer.future;
   }
 }
