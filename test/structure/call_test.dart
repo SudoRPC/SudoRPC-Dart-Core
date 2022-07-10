@@ -1,4 +1,3 @@
-import 'package:sudorpc/src/exception/invalid_input_exception.dart';
 import 'package:sudorpc/sudorpc.dart';
 import 'package:test/test.dart';
 
