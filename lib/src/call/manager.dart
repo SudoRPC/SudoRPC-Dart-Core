@@ -1,8 +1,13 @@
 import 'dart:async';
 
+import 'package:sudorpc/src/call/callback.dart';
+import 'package:sudorpc/src/call/create.dart';
+import 'package:sudorpc/src/call/proxy.dart';
 import 'package:sudorpc/src/exception/callback_not_found_exception.dart';
 import 'package:sudorpc/src/exception/invalid_return_exception.dart';
-import 'package:sudorpc/sudorpc.dart';
+import 'package:sudorpc/src/structure/call/base.dart';
+import 'package:sudorpc/src/structure/return/base.dart';
+import 'package:sudorpc/src/structure/return/v1.dart';
 import 'package:uuid/uuid.dart';
 
 class SudoRPCCallManager {
