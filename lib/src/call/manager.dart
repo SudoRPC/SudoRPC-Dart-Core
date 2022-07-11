@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:sudorpc/src/exception/callback_not_found.dart';
+import 'package:sudorpc/src/exception/callback_not_found_exception.dart';
 import 'package:sudorpc/src/exception/invalid_return_exception.dart';
 import 'package:sudorpc/sudorpc.dart';
 import 'package:uuid/uuid.dart';
