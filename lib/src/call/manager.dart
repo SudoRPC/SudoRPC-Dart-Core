@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:sudorpc/src/exception/callback_not_found.dart';
+import 'package:sudorpc/src/exception/invalid_return_exception.dart';
 import 'package:sudorpc/sudorpc.dart';
 import 'package:uuid/uuid.dart';
 
@@ -94,5 +95,42 @@ class SudoRPCCallManager {
     callback.reject(errors);
 
     _callbacks.remove(identifier);
+  }
+
+  void _listenerCallback({
+    required SudoRPCReturn message,
+  }) {
+    if (message is! SudoRPCReturnV1) {
+      throw SudoRPCInvalidReturnException(
+        message: 'Invalid return type: ${message.runtimeType}',
+        cause: message,
+      );
+    }
+
+    if (message.success) {
+      if (message is! SudoRPCReturnV1Success) {
+        throw SudoRPCInvalidReturnException(
+          message: 'Invalid return type: ${message.runtimeType}',
+          cause: message,
+        );
+      }
+
+      resolveCall(
+        identifier: message.identifier,
+        result: message.result,
+      );
+    } else {
+      if (message is! SudoRPCReturnV1Fail) {
+        throw SudoRPCInvalidReturnException(
+          message: 'Invalid return type: ${message.runtimeType}',
+          cause: message,
+        );
+      }
+
+      rejectCall(
+        identifier: message.identifier,
+        errors: message.errors,
+      );
+    }
   }
 }
