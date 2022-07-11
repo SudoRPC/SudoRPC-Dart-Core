@@ -25,7 +25,10 @@ class SudoRPCCallManager {
   void ignite() {
     final String listenerId = uuid.v4();
 
-    proxy.addListener(listenerId);
+    proxy.addListener(
+      listenerId,
+      _listenerCallback,
+    );
   }
 
   void dialDown() {
@@ -102,9 +105,9 @@ class SudoRPCCallManager {
     _callbacks.remove(identifier);
   }
 
-  void _listenerCallback({
-    required SudoRPCReturn message,
-  }) {
+  void _listenerCallback(
+    SudoRPCReturn message,
+  ) {
     if (message is! SudoRPCReturnV1) {
       throw SudoRPCInvalidReturnException(
         message: 'Invalid return type: ${message.runtimeType}',
