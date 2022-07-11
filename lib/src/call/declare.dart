@@ -1,3 +1,4 @@
+import 'package:sudorpc/src/structure/return/base.dart';
 import 'package:sudorpc/src/structure/return/v1.dart';
 
 typedef SudoRPCCallCallbackResolver = void Function(
@@ -6,4 +7,8 @@ typedef SudoRPCCallCallbackResolver = void Function(
 
 typedef SudoRPCCallCallbackRejector = void Function(
   List<SudoRPCReturnV1ErrorItem> errors,
+);
+
+typedef SudoRPCCallProxyCallback = void Function(
+  SudoRPCReturn message,
 );
