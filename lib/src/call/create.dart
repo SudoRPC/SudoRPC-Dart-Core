@@ -1,4 +1,5 @@
-import 'package:sudorpc/sudorpc.dart';
+import 'package:sudorpc/src/structure/call/base.dart';
+import 'package:sudorpc/src/structure/call/v1.dart';
 
 SudoRPCCall createSudoRPCCall({
   required String resource,
